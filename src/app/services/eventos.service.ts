@@ -15,32 +15,31 @@ export class EventosService {
   async init(){
     if(!this._storage) await this.storage.create();
     await this.loadData();
-    this.eventos = await this.storage.get('eventos');
+    this.eventos = await this._storage?.get('eventos');
     return this.eventos;
   }
   async loadData(){
     if(!this._storage) await this.init();
-    await this.storage.set('eventos', this.eventos);
+    const eventos = await this._storage?.get('eventos');
+    this.eventos = eventos || eventos.map( (e: Evento) => new Evento(e.id, e.titulo, e.descripcion, e.fecha, e.foto));
+  }
+
+  async getData(): Promise<Evento[]>{
+    if(!this._storage) await this.init();
+    await this.loadData();
     return this.eventos;
   }
 
-  async getData(){
+  async addEvento(titulo: string, descripcion: string, fecha: string, foto: string): Promise<void>{
     if(!this._storage) await this.init();
-    return this.eventos;
-  }
-
-  async addEvento(titulo: string, descripcion: string, fecha: string, foto: string){
-    if(!this._storage) await this.init();
-    const newEvento = new Evento(Date.now(),titulo, descripcion, fecha, foto);
+    const newEvento = new Evento(new Date().getTime(),titulo, descripcion, fecha, foto);
     this.eventos.push(newEvento);
-    await this.storage.set('eventos', this.eventos);
-    return this.eventos;
+    await this._storage?.set('eventos', this.eventos);
   }
 
-  async deleteEvento(id: number){
+  async deleteEvento(id: number): Promise<void>{
     if(!this._storage) await this.init();
     this.eventos = this.eventos.filter(evento => evento.id !== id);
-    await this.storage.set('eventos', this.eventos);
-    return this.eventos;
+    await this._storage?.set('eventos', this.eventos);
   }
 }
