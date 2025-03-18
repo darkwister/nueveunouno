@@ -21,7 +21,6 @@ export class VistaEventosPage implements OnInit {
   public descripcion?: string;
   public fecha?: string;
   public foto?: string;
-  public fotoPreview?: string;
   public eventos: Evento[] = [];
   public eventoSelected?: Evento;
 
@@ -39,8 +38,7 @@ export class VistaEventosPage implements OnInit {
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
-        this.fotoPreview = reader.result as string;
-        this.foto = this.fotoPreview;
+        this.foto = reader.result as string;
       };
       reader.readAsDataURL(file);
     }
@@ -90,5 +88,12 @@ export class VistaEventosPage implements OnInit {
       return;
     }
     this.router.navigate([`/detalles-eventos/${id}`]);
+  }
+
+  limpiarCampos(){
+    this.titulo = "";
+    this.descripcion = "";
+    this.fecha = "";
+    this.foto = "";
   }
 }
