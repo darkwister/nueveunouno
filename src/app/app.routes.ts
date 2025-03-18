@@ -11,7 +11,7 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/vista-eventos/vista-eventos.page').then( m => m.VistaEventosPage)
   },
   {
-    path: 'detalles-eventos',
+    path: 'detalles-eventos/:id',
     loadComponent: () => import('./pages/detalles-eventos/detalles-eventos.page').then( m => m.DetallesEventosPage)
   },
 ];

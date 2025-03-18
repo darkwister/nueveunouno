@@ -39,7 +39,13 @@ export class EventosService {
 
   async deleteEvento(id: number): Promise<void>{
     if(!this._storage) await this.init();
-    this.eventos = this.eventos.filter(evento => evento.id !== id);
+    this.eventos = this.eventos.filter(e => e.id !== id);
     await this._storage?.set('eventos', this.eventos);
+  }
+
+  async getById(id: number){
+    if(!this._storage) await this.init();
+    const eventos = await this.getData();
+    return eventos.find(evento => evento.id === id);
   }
 }
