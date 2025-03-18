@@ -8,7 +8,7 @@ import { EventosService } from 'src/app/services/eventos.service';
 import { Evento } from 'src/app/classes/evento';
 import { addSharp, addOutline, add } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
-
+//Job Jefferson Pérez Cabrera
 @Component({
   selector: 'app-vista-eventos',
   templateUrl: './vista-eventos.page.html',

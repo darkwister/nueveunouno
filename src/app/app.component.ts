@@ -5,6 +5,7 @@ import { addIcons } from 'ionicons';
 import { homeSharp, homeOutline } from 'ionicons/icons';
 import { EventosService } from './services/eventos.service';
 
+//Job Jefferson Pérez Cabrera
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',

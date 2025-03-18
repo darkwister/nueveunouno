@@ -8,6 +8,7 @@ import { Storage } from '@ionic/storage-angular';
 import { EventosService } from './app/services/eventos.service';
 
 bootstrapApplication(AppComponent, {
+  //Job Jefferson Pérez Cabrera 20230188
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     provideIonicAngular(),
