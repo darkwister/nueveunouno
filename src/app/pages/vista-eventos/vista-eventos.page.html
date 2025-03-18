@@ -1,13 +1,65 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Vista-Eventos</ion-title>
+    <ion-title>Vista Eventos</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Vista-Eventos</ion-title>
+      <ion-title size="large">Vista Eventos</ion-title>
     </ion-toolbar>
   </ion-header>
+  <ion-item>
+    <ion-input type="text" label="Titulo" labelPlacement="fixed" [(ngModel)]="titulo"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-textarea type="text" label="Descripcion" labelPlacement="fixed" [(ngModel)]="descripcion"></ion-textarea>
+  </ion-item>
+  <ion-item>
+    <ion-label position="fixed">Fecha</ion-label>
+    <ion-datetime-button datetime="datetime"></ion-datetime-button>
+    <ion-modal [keepContentsMounted]="true">
+      <ng-template>
+        <ion-datetime
+          id="datetime"
+          presentation="date-time"
+          [(ngModel)]="fecha"
+          [formatOptions]="{
+            date: {
+              weekday: 'short',
+              month: 'long',
+              day: '2-digit',
+            },
+            time: {
+              hour: '2-digit',
+              minute: '2-digit',
+            },
+          }"
+        ></ion-datetime>
+      </ng-template>
+    </ion-modal>  
+  </ion-item>
+  <ion-item>
+    <ion-input type="file" placeholder="Foto" (change)="onFileSelected($event)"></ion-input>
+  </ion-item>
+  <ion-button (click)="addEvento(titulo || '', descripcion || '', fecha || '', foto || '')">
+    <ion-icon slot="start" name="add"></ion-icon>
+    Agregar
+  </ion-button>
+    <ion-list>
+      <ion-item-sliding *ngFor="let evento of eventos" (click)="eventoSelected = evento">
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <img [src]="evento.foto" />
+          </ion-thumbnail>
+          <ion-text color="primary" class="ion-text-center">
+            <h1>{{ evento.titulo }}</h1> 
+          </ion-text>
+        </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option (click)="deleteEvento(eventoSelected?.id ?? 0)">Eliminar</ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
 </ion-content>

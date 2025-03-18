@@ -13,10 +13,8 @@ export class EventosService {
   }
 
   async init(){
-    if(!this._storage) await this.storage.create();
+    this._storage =await this.storage.create();
     await this.loadData();
-    this.eventos = await this._storage?.get('eventos');
-    return this.eventos;
   }
   async loadData(){
     if(!this._storage) await this.init();
