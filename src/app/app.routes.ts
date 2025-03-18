@@ -7,8 +7,11 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'folder/:id',
-    loadComponent: () =>
-      import('./folder/folder.page').then((m) => m.FolderPage),
+    path: 'vista-eventos',
+    loadComponent: () => import('./pages/vista-eventos/vista-eventos.page').then( m => m.VistaEventosPage)
+  },
+  {
+    path: 'detalles-eventos',
+    loadComponent: () => import('./pages/detalles-eventos/detalles-eventos.page').then( m => m.DetallesEventosPage)
   },
 ];
